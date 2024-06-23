@@ -2,31 +2,24 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
 {
-    public $status;
-    public $message;
     /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function __construct($status, $message, $resource)
-    {
-        parent::__construct($resource);
-        $this->status = $status;
-        $this->message = $message;
-    }
-
     public function toArray($request)
     {
         return [
-            'success' => $this->status, 
-            'message' => $this->message, 
-            'data' => $this->resource   
+            'id' => $this->id, 
+            'title' => $this->title, 
+            'news_content' => $this->news_content, 
+            'created_at' => date_format($this->created_at, "Y/m/d"), 
         ];
     }
 }
